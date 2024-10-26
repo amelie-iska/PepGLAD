@@ -131,7 +131,7 @@ CUDA_VISIBLE_DEVICES=0 python -m api.run \
     --length_max 15 \
     --n_samples 10
 ```
-Then 10 generations will be outputed under the folder `./output/struct_pred`.
+Then 10 generations will be outputed under the folder `./output/codesign`.
 
 ### Peptide Binding Conformation Generation
 
