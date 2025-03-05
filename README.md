@@ -196,10 +196,12 @@ Please feel free to ask about any questions about the algorithms, codes, as well
 ## Reference
 
 ```bibtex
-@article{kong2024full,
+@article{kong2025full,
   title={Full-atom peptide design with geometric latent diffusion},
-  author={Kong, Xiangzhe and Huang, Wenbing and Liu, Yang},
-  journal={arXiv preprint arXiv:2402.13555},
-  year={2024}
+  author={Kong, Xiangzhe and Jia, Yinjun and Huang, Wenbing and Liu, Yang},
+  journal={Advances in Neural Information Processing Systems},
+  volume={37},
+  pages={74808--74839},
+  year={2025}
 }
 ```
