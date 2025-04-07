@@ -79,7 +79,8 @@ class AutoEncoder(nn.Module):
             n_rbf=0,
             cutoff=0,
             encoder='dyMEAN',
-            mode='codesign' # codesign, fixbb (inverse folding), fixseq (structure prediction)
+            mode='codesign', # codesign, fixbb (inverse folding), fixseq (structure prediction)
+            additional_noise_scale=0.0 # whether to add additional noise on coordinates to enhance robustness
         ) -> None:
         super().__init__()
         self.mask_id = mask_id
@@ -97,6 +98,7 @@ class AutoEncoder(nn.Module):
         self.latent_n_channel = 0 if self.mode == 'fixbb' else latent_n_channel
         self.anchor_at_ca = anchor_at_ca
         self.coord_prior_var = coord_prior_var
+        self.additional_noise_scale = additional_noise_scale
 
         if self.fix_alpha_carbon: assert self.latent_n_channel == 1, f'Specifying fix alpha carbon (use Ca as the latent coordinate) but number of latent channels is not 1'
         if self.anchor_at_ca: assert self.latent_n_channel == 1, f'Specifying anchor_at_ca as True but number of latent channels is not 1'
@@ -377,6 +379,11 @@ class AutoEncoder(nn.Module):
             coord_reg_loss = F.mse_loss(Z, self._get_latent_channel_anchors(true_X, atom_mask[mask]))
         else:
             coord_reg_loss = 0
+
+        # add noise to improve robustness
+        if self.training:
+            noise = torch.randn_like(Z) * getattr(self, 'additional_noise_scale', 0.0)
+            Z = Z + noise
 
         # decode: S (N), Z (N * 14 * 3) with atom mask
         recon_S_logits, recon_X = self.decode(X, S, H, Z, mask, position_ids, lengths, atom_mask, teacher_forcing)
