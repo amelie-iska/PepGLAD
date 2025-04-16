@@ -6,11 +6,11 @@
 
 - [Setup](#setup)
     - [Environment](#environment)
-    - [Datasets](#datasets)
+    - [Datasets](#optional-datasets)
     - [Trained Weights](#trained-weights)
 - [Usage](#usage)
     - [Peptide Sequence-Structure Co-Design](#peptide-sequence-structure-co-design)
-    - [Peptide Binding Structure Prediction](#peptide-binding-structure-prediction)
+    - [Peptide Binding Conformation Generation](#peptide-binding-conformation-generation)
 - [Reproduction of Paper Experiments](#reproduction-of-paper-experiments)
     - [Codesign](#codesign)
     - [Binding Conformation Generation](#binding-conformation-generation)
